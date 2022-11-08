@@ -11,9 +11,7 @@ def index():
 
 @app.route("/query_github/<string>")
 def query_github(string):
-    print("string is: ", string)
     res = requests.get("https://api.github.com/search/repositories?q={}".format(string))
-    print(res.json().keys())
     data = res.json()['items'][:5]
     data = [ { "name": i['name'], "url": i['html_url'] } for i in data ]
     return data
